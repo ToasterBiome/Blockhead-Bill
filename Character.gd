@@ -1,8 +1,7 @@
 extends CharacterBody2D
 
 var walk_speed: float = 256
-var facing_direction: Vector2i = Vector2i.UP
-
+@onready var sprite: AnimatedSprite2D = $Sprite2D
 var held_item: RigidBody2D
 
 func _init():
@@ -20,7 +19,16 @@ func _process(delta):
 		velocity += Vector2.DOWN
 	velocity = velocity.normalized()
 	velocity = velocity * walk_speed
-	#position += delta * velocity * walk_speed
+	if(velocity != Vector2.ZERO && sprite.animation != "walk"):
+		sprite.animation = "walk"
+		sprite.play()
+		print("setting")
+	if(velocity == Vector2.ZERO && sprite.animation != "idle"):
+		sprite.animation = "idle"
+		sprite.play()
+	if(velocity.x != 0):
+		sprite.flip_h = (velocity.x > 0)
+
 	move_and_slide()
 	
 	if(Input.is_action_just_pressed("mouse_left")):

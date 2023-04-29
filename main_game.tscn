@@ -1,14 +1,44 @@
-[gd_scene load_steps=10 format=3 uid="uid://dfg0rwoedr7fq"]
+[gd_scene load_steps=13 format=3 uid="uid://dfg0rwoedr7fq"]
 
 [ext_resource type="Script" path="res://Character.gd" id="1_hyaq0"]
 [ext_resource type="Texture2D" uid="uid://bddxha0ukbdln" path="res://sprites/floor.png" id="1_jle0j"]
-[ext_resource type="Texture2D" uid="uid://dvrr2kh11tttj" path="res://test_sprite.png" id="1_ypycq"]
 [ext_resource type="PackedScene" uid="uid://bggeofimgamg5" path="res://box.tscn" id="3_t2gdk"]
 [ext_resource type="Texture2D" uid="uid://byp3ojkyy6pqj" path="res://sprites/background.png" id="4_0qoy7"]
+[ext_resource type="Texture2D" uid="uid://coie2lt4ypk7s" path="res://sprites/blockhead1.png" id="4_hujye"]
+[ext_resource type="Texture2D" uid="uid://cit8nqxxv24u7" path="res://sprites/blockhead2.png" id="4_odj28"]
 [ext_resource type="Texture2D" uid="uid://mlgmate7l8tb" path="res://sprites/debug_tile.png" id="6_0cq4q"]
+[ext_resource type="Texture2D" uid="uid://ce56e6fwiahcb" path="res://sprites/blockhead3.png" id="6_y4747"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bx7b8"]
 size = Vector2(64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ykr2d"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_odj28")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_hujye")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_odj28")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_y4747")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_odj28")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1f86y"]
 texture = ExtResource("6_0cq4q")
@@ -41,9 +71,11 @@ script = ExtResource("1_hyaq0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Character"]
 shape = SubResource("RectangleShape2D_bx7b8")
 
-[node name="Sprite2D" type="Sprite2D" parent="Character"]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="Character"]
 scale = Vector2(0.063, 0.063)
-texture = ExtResource("1_ypycq")
+sprite_frames = SubResource("SpriteFrames_ykr2d")
+animation = &"idle"
+autoplay = "default"
 
 [node name="Box" parent="." instance=ExtResource("3_t2gdk")]
 position = Vector2(387, 174)
