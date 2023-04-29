@@ -23,14 +23,17 @@ func _process(_delta):
 		velocity += Vector2.DOWN
 	velocity = velocity.normalized()
 	velocity = velocity * walk_speed
-	if(velocity != Vector2.ZERO && sprite.animation != "walk"):
+	if(velocity != Vector2.ZERO && !("walk" in sprite.animation)):
 		sprite.animation = "walk"
-		sprite.play()
-	if(velocity == Vector2.ZERO && sprite.animation != "idle"):
+	if(velocity == Vector2.ZERO && !("idle" in sprite.animation)):
 		sprite.animation = "idle"
-		sprite.play()
+	if(held_item && !("_hold" in sprite.animation)):
+		sprite.animation += "_hold"
+	sprite.play()
 	if(velocity.x != 0):
 		sprite.flip_h = (velocity.x > 0)
+		if(held_item):
+			held_item.position = Vector2(sign(velocity.x) * 64, 0)
 
 	move_and_slide()
 	
@@ -46,6 +49,7 @@ func pickup_item(item: RigidBody2D):
 	held_item = item
 	held_item.get_parent().remove_child(held_item)
 	add_child(held_item)
+	held_item.position = Vector2(sign(float(sprite.flip_h) - 0.5) * 64, 0)
 	held_item.on_pickup()
 	touched_box = null
 	

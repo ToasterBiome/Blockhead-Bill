@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7k1p75yvuc75"]
+
+[ext_resource type="Script" path="res://DropArea.gd" id="1_d6jy1"]
+[ext_resource type="Texture2D" uid="uid://b1p82fv2uapsh" path="res://sprites/drop_area.png" id="2_lce6j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_umsj8"]
+size = Vector2(96, 96)
+
+[node name="DropArea" type="Area2D"]
+position = Vector2(322, 590)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_d6jy1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_umsj8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lce6j")
