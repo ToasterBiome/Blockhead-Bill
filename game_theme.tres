@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://buudspsmq6qqx"]
+
+[ext_resource type="FontFile" uid="uid://c3tkyametfcve" path="res://fonts/BadComic-Italic.ttf" id="1_6snfk"]
+[ext_resource type="FontFile" uid="uid://crppu31lkl0yn" path="res://fonts/BadComic-Regular.ttf" id="2_jf0dw"]
+
+[resource]
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+RichTextLabel/font_sizes/italics_font_size = 24
+RichTextLabel/font_sizes/normal_font_size = 24
+RichTextLabel/fonts/italics_font = ExtResource("1_6snfk")
+RichTextLabel/fonts/normal_font = ExtResource("2_jf0dw")
