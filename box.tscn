@@ -8,6 +8,7 @@ size = Vector2(48, 48)
 
 [node name="Box" type="RigidBody2D"]
 position = Vector2(129, 106)
+collision_layer = 2
 collision_mask = 0
 input_pickable = true
 gravity_scale = 0.0
@@ -18,5 +19,5 @@ script = ExtResource("1_oi1tb")
 shape = SubResource("RectangleShape2D_w4you")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.048, 0.048)
+scale = Vector2(0.063, 0.063)
 texture = ExtResource("2_it7qf")
