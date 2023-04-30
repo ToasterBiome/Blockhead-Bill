@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CustomerData" load_steps=8 format=3 uid="uid://lmkclmu3rr8y"]
+
+[ext_resource type="Texture2D" uid="uid://1mpowj88ub0m" path="res://sprites/robothappy.png" id="1_ovicx"]
+[ext_resource type="Texture2D" uid="uid://c1qxns2ylig4d" path="res://sprites/robotidle1.png" id="2_j4sm8"]
+[ext_resource type="Texture2D" uid="uid://b0rbx7r6vp1kg" path="res://sprites/robbotidle2.png" id="3_sg8mb"]
+[ext_resource type="Texture2D" uid="uid://b7c17grh7lesg" path="res://sprites/robbottalk1.png" id="4_3q44p"]
+[ext_resource type="Texture2D" uid="uid://dbw2l2s2xb52w" path="res://sprites/robottalk2.png" id="5_wkoda"]
+[ext_resource type="Script" path="res://CustomerData.gd" id="6_1u455"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4nkn6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ovicx")
+}],
+"loop": true,
+"name": &"happy",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_j4sm8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sg8mb")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_3q44p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wkoda")
+}],
+"loop": true,
+"name": &"talk",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("6_1u455")
+animations = SubResource("SpriteFrames_4nkn6")

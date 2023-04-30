@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CustomerData" load_steps=8 format=3 uid="uid://knk0dpypq5ls"]
+
+[ext_resource type="Texture2D" uid="uid://4gbq2qy2btgf" path="res://sprites/astrohappy.png" id="1_45rbt"]
+[ext_resource type="Texture2D" uid="uid://c7dxuo3ploh1x" path="res://sprites/astroidle1.png" id="2_ux0kx"]
+[ext_resource type="Texture2D" uid="uid://dl54girp2cr4h" path="res://sprites/astroidle2.png" id="3_ernf4"]
+[ext_resource type="Texture2D" uid="uid://b6pfdxoh43ep8" path="res://sprites/astrotalk1.png" id="4_wj7g0"]
+[ext_resource type="Texture2D" uid="uid://5fmdx6ic47ro" path="res://sprites/astrotalk2.png" id="5_o8scd"]
+[ext_resource type="Script" path="res://CustomerData.gd" id="6_qkbdv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gl7si"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_45rbt")
+}],
+"loop": true,
+"name": &"happy",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ux0kx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ernf4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_wj7g0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_o8scd")
+}],
+"loop": true,
+"name": &"talk",
+"speed": 2.0
+}]
+
+[resource]
+script = ExtResource("6_qkbdv")
+animations = SubResource("SpriteFrames_gl7si")

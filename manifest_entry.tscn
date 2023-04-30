@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dj387uo7ujl87"]
+
+[ext_resource type="Theme" uid="uid://buudspsmq6qqx" path="res://game_theme.tres" id="1_pyk31"]
+[ext_resource type="Script" path="res://manifest_entry.gd" id="2_5inc3"]
+
+[node name="Manifest Entry" type="RichTextLabel"]
+custom_minimum_size = Vector2(256, 32)
+theme = ExtResource("1_pyk31")
+bbcode_enabled = true
+text = "[center][shake rate=2 level=2]12345678 -  SMALL, GREEN[/shake][/center]"
+script = ExtResource("2_5inc3")

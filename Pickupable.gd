@@ -5,17 +5,14 @@ class_name Pickupable
 @onready var sprite: Sprite2D = $Sprite2D
 
 var held: bool = false
-var color: Color = Color.WHITE
-var size: String = "normal"
-var serial_number: String = "asdancjqwenwe"
+
 var claimed_by: Customer
+var data: BoxData = null : set = _set_box_data
 
 func _ready():
-	sprite.texture = Global.box_sprites[size]
-	sprite.modulate = color
-	serial_number = Global.get_serial_number(8)
-	print(serial_number)
+	sprite.material = sprite.material.duplicate()
 	Global.boxes.append(self)
+	Global.available_boxes.append(self)
 	
 func on_pickup():
 	held = true
@@ -30,3 +27,14 @@ func on_drop(drop_position: Vector2):
 	freeze = false
 	position = drop_position
 	modulate = Color.WHITE
+	
+func _set_box_data(value):
+	data = value
+	sprite.texture = Global.box_sprites[data.size]
+	sprite.modulate = data.color
+	
+func select():
+	sprite.material.set("shader_parameter/line_color", Color.GREEN)
+
+func deselect():
+	sprite.material.set("shader_parameter/line_color", Color(1,1,1,0))

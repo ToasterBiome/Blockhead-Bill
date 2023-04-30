@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="CustomerData" load_steps=8 format=3 uid="uid://kf180vf40lrn"]
+
+[ext_resource type="Texture2D" uid="uid://cfpiv4vgxlvf1" path="res://sprites/burglarhappy.png" id="1_m4xg5"]
+[ext_resource type="Texture2D" uid="uid://dm141o8fuphnm" path="res://sprites/burglaridle1.png" id="2_ktfre"]
+[ext_resource type="Texture2D" uid="uid://benaqxqs151vh" path="res://sprites/burglaridle2.png" id="3_nif11"]
+[ext_resource type="Texture2D" uid="uid://dtvff5kngffto" path="res://sprites/burglartalk1.png" id="4_uhae5"]
+[ext_resource type="Texture2D" uid="uid://c74ihyfoc27jy" path="res://sprites/burglartalk2.png" id="5_wdvhx"]
+[ext_resource type="Script" path="res://CustomerData.gd" id="6_xh64n"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n6y38"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_m4xg5")
+}],
+"loop": true,
+"name": &"happy",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ktfre")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nif11")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_uhae5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wdvhx")
+}],
+"loop": true,
+"name": &"talk",
+"speed": 2.0
+}]
+
+[resource]
+script = ExtResource("6_xh64n")
+animations = SubResource("SpriteFrames_n6y38")
