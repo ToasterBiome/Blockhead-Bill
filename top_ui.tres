@@ -1,0 +1,17 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dy3s2gjdlontx"]
+
+[ext_resource type="FontFile" uid="uid://c3tkyametfcve" path="res://fonts/BadComic-Italic.ttf" id="1_qm0cp"]
+[ext_resource type="FontFile" uid="uid://crppu31lkl0yn" path="res://fonts/BadComic-Regular.ttf" id="2_wmwin"]
+
+[resource]
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 16
+Label/font_sizes/font_size = 32
+Label/fonts/font = ExtResource("2_wmwin")
+RichTextLabel/colors/default_color = Color(1, 0.929412, 0.980392, 1)
+RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+RichTextLabel/constants/outline_size = 16
+RichTextLabel/font_sizes/italics_font_size = 48
+RichTextLabel/font_sizes/normal_font_size = 48
+RichTextLabel/fonts/italics_font = ExtResource("1_qm0cp")
+RichTextLabel/fonts/normal_font = ExtResource("2_wmwin")

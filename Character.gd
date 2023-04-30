@@ -6,10 +6,13 @@ var held_item: RigidBody2D
 var boxes_around: Array[RigidBody2D]
 @onready var grabArea: Area2D = $Area2D
 
+var can_move: bool = false
+
 func _ready():
 	Global.player = self
 	grabArea.connect("body_entered", Callable(self, "_on_area_entered"))
 	grabArea.connect("body_exited", Callable(self, "_on_area_exited"))
+	$"..".connect("on_game_state_changed",Callable(self,"on_game_state_changed"))
 
 func _process(_delta):
 	z_index = int(position.y)
@@ -22,6 +25,8 @@ func _process(_delta):
 		velocity += Vector2.UP
 	if(Input.get_action_strength("down")):
 		velocity += Vector2.DOWN
+	if(!can_move):
+		velocity = Vector2.ZERO
 	velocity = velocity.normalized()
 	velocity = velocity * walk_speed
 	if(velocity != Vector2.ZERO && !("walk" in sprite.animation)):
@@ -86,4 +91,10 @@ func _on_area_entered(body: Node2D):
 func _on_area_exited(body: Node2D):
 	boxes_around.erase(body)
 	body.deselect()
+	
+func on_game_state_changed(state: GameManager.GameState):
+	if(state == GameManager.GameState.GAME_PLAYING):
+		can_move = true
+	else:
+		can_move = false
 	

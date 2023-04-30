@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dfg0rwoedr7fq"]
+[gd_scene load_steps=32 format=3 uid="uid://dfg0rwoedr7fq"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_8coj5"]
 [ext_resource type="Script" path="res://Character.gd" id="1_hyaq0"]
@@ -12,7 +12,12 @@
 [ext_resource type="Theme" uid="uid://buudspsmq6qqx" path="res://game_theme.tres" id="10_pa486"]
 [ext_resource type="Texture2D" uid="uid://c7gba2tcg5xjt" path="res://sprites/blockheadcarry1.png" id="11_w51pe"]
 [ext_resource type="Texture2D" uid="uid://qiwh472h5lk2" path="res://sprites/blockheadcarry3.png" id="12_jwhsm"]
+[ext_resource type="Script" path="res://ManifestWindow.gd" id="13_goxs5"]
+[ext_resource type="Theme" uid="uid://dy3s2gjdlontx" path="res://top_ui.tres" id="15_sl0w8"]
+[ext_resource type="Texture2D" uid="uid://b68o1f63vv8bv" path="res://sprites/controls/wasd.png" id="16_pw6bb"]
 [ext_resource type="Script" path="res://ConveyorBelt.gd" id="17_purh3"]
+[ext_resource type="Texture2D" uid="uid://b0ac7nnks04s" path="res://sprites/controls/mouse_press.png" id="17_xr435"]
+[ext_resource type="Texture2D" uid="uid://bb8cpvx0s8e15" path="res://sprites/controls/tab.png" id="18_suq7i"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eeai7"]
 texture = ExtResource("6_0cq4q")
@@ -28,7 +33,7 @@ physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_eeai7")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5205"]
-size = Vector2(768, 64)
+size = Vector2(768, 16)
 
 [sub_resource type="Gradient" id="Gradient_wh22a"]
 
@@ -101,9 +106,17 @@ radius = 96.0
 [sub_resource type="Gradient" id="Gradient_8tyj0"]
 colors = PackedColorArray(1, 0.776471, 0.768627, 1, 1, 1, 0.92549, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_jbu5y"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2sidj"]
 gradient = SubResource("Gradient_8tyj0")
 fill_from = Vector2(1, 1)
+
+[sub_resource type="Gradient" id="Gradient_7adjm"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yi8bu"]
+gradient = SubResource("Gradient_7adjm")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0.987179, 0.00854701)
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_8coj5")
@@ -115,6 +128,8 @@ wait_time = 0.5
 
 [node name="Customer Spawn Timer" type="Timer" parent="Timers"]
 wait_time = 5.0
+
+[node name="Clock Timer" type="Timer" parent="Timers"]
 
 [node name="Floor" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
@@ -180,30 +195,167 @@ position = Vector2(1251, 277)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="Manifest" type="NinePatchRect" parent="GUI"]
-visible = false
+[node name="Manifest" type="MarginContainer" parent="GUI"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -272.0
+offset_left = -400.0
 offset_top = 16.0
 offset_right = -16.0
-offset_bottom = 528.0
+offset_bottom = 144.0
 grow_horizontal = 0
-texture = SubResource("GradientTexture2D_jbu5y")
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+script = ExtResource("13_goxs5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Manifest"]
-layout_mode = 0
-offset_right = 152.0
-offset_bottom = 43.0
-theme_override_constants/separation = 8
+[node name="TextureRect" type="TextureRect" parent="GUI/Manifest"]
+layout_mode = 2
+texture = SubResource("GradientTexture2D_2sidj")
 
-[node name="Manifest Entry" type="RichTextLabel" parent="GUI/Manifest/VBoxContainer"]
-custom_minimum_size = Vector2(192, 32)
+[node name="Contents" type="VBoxContainer" parent="GUI/Manifest"]
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="GUI/Manifest/Contents"]
+custom_minimum_size = Vector2(384, 32)
 layout_mode = 2
 theme = ExtResource("10_pa486")
 bbcode_enabled = true
-text = "[s][shake rate=2 level=2]12345678[/shake][s]"
+text = "[center][shake rate=2 level=2][u]MANIFEST[/u][/shake][/center]"
+
+[node name="Vertical Container" type="VBoxContainer" parent="GUI/Manifest/Contents"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Day Label" type="RichTextLabel" parent="GUI"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 272.0
+offset_bottom = 112.0
+rotation = -0.0349066
+theme = ExtResource("15_sl0w8")
+bbcode_enabled = true
+text = "Day 1"
+
+[node name="Timer Label" type="RichTextLabel" parent="GUI"]
+offset_left = 192.0
+offset_top = 16.0
+offset_right = 704.0
+offset_bottom = 112.0
+rotation = -0.0349066
+theme = ExtResource("15_sl0w8")
+bbcode_enabled = true
+text = "2:00 until overtime"
+
+[node name="Controls" type="HBoxContainer" parent="GUI"]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -51.0
+offset_right = 8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 32
+
+[node name="WASD" type="HBoxContainer" parent="GUI/Controls"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="WASD Icon" type="TextureRect" parent="GUI/Controls/WASD"]
+texture_filter = 1
+custom_minimum_size = Vector2(62, 44)
+layout_mode = 2
+texture = ExtResource("16_pw6bb")
+
+[node name="WASD Label" type="Label" parent="GUI/Controls/WASD"]
+custom_minimum_size = Vector2(31, 19)
+layout_mode = 2
+theme = ExtResource("15_sl0w8")
+text = "Move"
+
+[node name="Pickup" type="HBoxContainer" parent="GUI/Controls"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Pickup Icon" type="TextureRect" parent="GUI/Controls/Pickup"]
+texture_filter = 1
+custom_minimum_size = Vector2(48, 44)
+layout_mode = 2
+texture = ExtResource("17_xr435")
+
+[node name="Pickup Label" type="Label" parent="GUI/Controls/Pickup"]
+custom_minimum_size = Vector2(31, 19)
+layout_mode = 2
+theme = ExtResource("15_sl0w8")
+text = "Pickup/Drop"
+
+[node name="Manifest" type="HBoxContainer" parent="GUI/Controls"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Manifest Icon" type="TextureRect" parent="GUI/Controls/Manifest"]
+texture_filter = 1
+custom_minimum_size = Vector2(46, 44)
+layout_mode = 2
+texture = ExtResource("18_suq7i")
+
+[node name="Manifest Label" type="Label" parent="GUI/Controls/Manifest"]
+custom_minimum_size = Vector2(31, 19)
+layout_mode = 2
+theme = ExtResource("15_sl0w8")
+text = "Open/Close Manifest"
+
+[node name="Black Screen" type="TextureRect" parent="GUI"]
+visible = false
+modulate = Color(1, 1, 1, 0.784314)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_yi8bu")
+
+[node name="Continue Text" type="RichTextLabel" parent="GUI/Black Screen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -32.0
+offset_right = 512.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("15_sl0w8")
+bbcode_enabled = true
+text = "[center]You've made the company more money![/center]"
+
+[node name="Game Over Text" type="RichTextLabel" parent="GUI/Black Screen"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -64.0
+offset_right = 640.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("15_sl0w8")
+bbcode_enabled = true
+text = "[center][color=#FF0000]You have been fired for 
+getting 23 seconds of overtime.[/color][/center]"
 
 [node name="Standing Areas" type="Node2D" parent="."]
 

@@ -4,6 +4,7 @@ class_name Customer
 @onready var speech_bubble: Node2D = $"Speech Bubble"
 @onready var speech_text: RichTextLabel = $"Speech Bubble/Text"
 @onready var pickup_area: Area2D = $"Pickup Zone"
+@onready var sprite: AnimatedSprite2D = $"Customer Sprite"
 
 var move_speed: float = 96
 var moving: bool = false
@@ -20,6 +21,8 @@ signal on_move_complete
 
 var package_description: String = "asdasdasdasd"
 
+var data: CustomerData
+
 signal on_customer_got_correct_package
 signal on_customer_leave
 
@@ -28,16 +31,20 @@ func _ready():
 	wanted_package = Global.available_boxes.pick_random()
 	Global.available_boxes.erase(wanted_package)
 	_set_description()
+	set_data(Global.customer_list.pick_random())
 	pickup_area.connect("body_entered", Callable(self,"check_box"))
 	pickup_area.connect("body_exited", Callable(self,"clear_box"))
 	await on_move_complete
 	speech_bubble.show()
 	set_text(package_description)
+	
 
 func _process(delta):
 	z_index = int(position.y)
 	if(moving):
 		global_position = global_position.move_toward(destination_position, delta * move_speed)
+		var velocity: Vector2 = destination_position - global_position
+		sprite.flip_h = (velocity.x < 0)
 		if(global_position == destination_position):
 			moving = false
 			destination_position = Vector2.ZERO
@@ -56,6 +63,14 @@ func _set_description():
 func move_to(destination: Vector2):
 	destination_position = destination
 	moving = true
+	if(got_package):
+		sprite.animation = "happy"
+	else:
+		sprite.animation = "idle"
+	sprite.play()
+	await on_move_complete
+	sprite.animation = "talk"
+	sprite.play()
 	
 func set_text(text: String):
 	speech_text.clear()
@@ -93,7 +108,7 @@ func check_box(box: Node2D):
 	print("WHAT: " + box.name)
 	if(box == wanted_package):
 		call_deferred("get_package_and_leave")
-	set_text("this isn't my package binch")
+	set_text("this isn't my package!")
 	
 func clear_box(_box: Node2D):
 	if(got_package):
@@ -102,4 +117,8 @@ func clear_box(_box: Node2D):
 		speech_bubble.hide()
 	else:
 		set_text(package_description)
+		
+func set_data(data: CustomerData):
+	self.data = data
+	sprite.sprite_frames = data.animations
 	
