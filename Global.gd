@@ -12,16 +12,17 @@ var box_sprites: Dictionary = {
 	"really tall": preload("res://sprites/box7.png"),
 	}
 	
-var box_colors = [
-	Color.RED,
-	Color.GREEN,
-	Color.YELLOW,
-	Color.SADDLE_BROWN
-]
+var box_colors = {
+	Color.RED: "red",
+	Color.GREEN: "green",
+	Color.YELLOW: "yellow",
+	Color.SADDLE_BROWN: "brown"
+}
 
 var random_characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ012345678"
 
 var boxes = []
+var available_boxes = []
 
 func get_serial_number(length: int):
 	var result = ""

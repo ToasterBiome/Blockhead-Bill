@@ -3,7 +3,7 @@ extends CharacterBody2D
 var walk_speed: float = 256
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 var held_item: RigidBody2D
-var touched_box: RigidBody2D
+var boxes_around: Array[RigidBody2D]
 @onready var grabArea: Area2D = $Area2D
 
 func _ready():
@@ -12,6 +12,7 @@ func _ready():
 	grabArea.connect("body_exited", Callable(self, "_on_area_exited"))
 
 func _process(_delta):
+	z_index = int(position.y)
 	velocity = Vector2.ZERO
 	if(Input.get_action_strength("left")):
 		velocity += Vector2.LEFT
@@ -38,20 +39,33 @@ func _process(_delta):
 	move_and_slide()
 	
 	if(Input.is_action_just_pressed("mouse_left")):
-		if(held_item == null && touched_box != null):
-			pickup_item(touched_box)
+		if(held_item == null):
+			pickup_item()
 		else:
 			drop_item()
 			
 	
 	
-func pickup_item(item: RigidBody2D):
-	held_item = item
+func pickup_item():
+	if(boxes_around.size() == 0):
+		return
+	var mouse_position = get_global_mouse_position()
+	var best_box = null
+	var closest_dist: float = 99999
+	for box in boxes_around:
+		var dist = box.position.distance_to(mouse_position)
+		if(dist < closest_dist):
+			closest_dist = dist
+			best_box = box
+	if(!best_box):
+		return
+	held_item = best_box
 	held_item.get_parent().remove_child(held_item)
 	add_child(held_item)
 	held_item.position = Vector2(sign(float(sprite.flip_h) - 0.5) * 64, 0)
 	held_item.on_pickup()
-	touched_box = null
+	boxes_around.erase(held_item)
+	held_item.deselect()
 	
 func drop_item():
 	if(held_item == null):
@@ -65,15 +79,11 @@ func drop_item():
 	held_item = null
 	
 func _on_area_entered(body: Node2D):
-	if(touched_box != null):
-		touched_box.modulate = Color.WHITE
-	print("touched: " + str(body.name))
-	touched_box = body
-	touched_box.modulate = Color.GREEN
-	pass
+	if !(body in boxes_around):
+		boxes_around.append(body)
+		body.select()
 	
 func _on_area_exited(body: Node2D):
-	if(body == touched_box):
-		touched_box.modulate = Color.WHITE
-		touched_box = null
+	boxes_around.erase(body)
+	body.deselect()
 	

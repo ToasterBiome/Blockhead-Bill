@@ -1,7 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://b7k1p75yvuc75"]
+[gd_scene load_steps=4 format=3 uid="uid://bgeioivgduwq5"]
 
-[ext_resource type="Script" path="res://DropArea.gd" id="1_d6jy1"]
 [ext_resource type="Texture2D" uid="uid://b1p82fv2uapsh" path="res://sprites/drop_area.png" id="2_lce6j"]
+
+[sub_resource type="GDScript" id="GDScript_yk0p6"]
+script/source = "extends Area2D
+class_name DropArea
+
+var customer: Customer
+
+func _ready():
+	connect(\"body_entered\", Callable(self,\"_on_body_entered\"))
+	connect(\"body_exited\", Callable(self,\"_on_body_exited\"))
+	
+func _on_body_entered(body: Node2D):
+	body.position = position
+	if(customer):
+		customer.check_box(body)
+		
+func _on_body_exited(body: Node2D):
+	customer.clear_box()
+	
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umsj8"]
 size = Vector2(96, 96)
@@ -10,7 +29,7 @@ size = Vector2(96, 96)
 position = Vector2(322, 590)
 collision_layer = 0
 collision_mask = 2
-script = ExtResource("1_d6jy1")
+script = SubResource("GDScript_yk0p6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_umsj8")

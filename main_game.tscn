@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dfg0rwoedr7fq"]
+[gd_scene load_steps=25 format=3 uid="uid://dfg0rwoedr7fq"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_8coj5"]
 [ext_resource type="Script" path="res://Character.gd" id="1_hyaq0"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://mlgmate7l8tb" path="res://sprites/debug_tile.png" id="6_0cq4q"]
 [ext_resource type="Texture2D" uid="uid://ce56e6fwiahcb" path="res://sprites/blockhead3.png" id="6_y4747"]
 [ext_resource type="Texture2D" uid="uid://b8ek6c5bloja1" path="res://sprites/blockheadcarry2.png" id="8_50i7b"]
-[ext_resource type="PackedScene" uid="uid://b7k1p75yvuc75" path="res://drop_area.tscn" id="9_5keot"]
 [ext_resource type="Theme" uid="uid://buudspsmq6qqx" path="res://game_theme.tres" id="10_pa486"]
 [ext_resource type="Texture2D" uid="uid://c7gba2tcg5xjt" path="res://sprites/blockheadcarry1.png" id="11_w51pe"]
 [ext_resource type="Texture2D" uid="uid://qiwh472h5lk2" path="res://sprites/blockheadcarry3.png" id="12_jwhsm"]
@@ -99,6 +98,13 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_fo24l"]
 radius = 96.0
 
+[sub_resource type="Gradient" id="Gradient_8tyj0"]
+colors = PackedColorArray(1, 0.776471, 0.768627, 1, 1, 1, 0.92549, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jbu5y"]
+gradient = SubResource("Gradient_8tyj0")
+fill_from = Vector2(1, 1)
+
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_8coj5")
 
@@ -106,6 +112,9 @@ script = ExtResource("1_8coj5")
 
 [node name="Box Spawn Timer" type="Timer" parent="Timers"]
 wait_time = 0.5
+
+[node name="Customer Spawn Timer" type="Timer" parent="Timers"]
+wait_time = 5.0
 
 [node name="Floor" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
@@ -166,33 +175,49 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Character/Area2D"]
 shape = SubResource("CircleShape2D_fo24l")
 
-[node name="DropArea" parent="." instance=ExtResource("9_5keot")]
-
-[node name="DropArea2" parent="." instance=ExtResource("9_5keot")]
-position = Vector2(322, 473)
-
-[node name="DropArea3" parent="." instance=ExtResource("9_5keot")]
-position = Vector2(321, 369)
-
 [node name="Box Spawn" type="Node2D" parent="."]
 position = Vector2(1251, 277)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="GUI"]
-anchors_preset = 15
+[node name="Manifest" type="NinePatchRect" parent="GUI"]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("10_pa486")
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+offset_left = -272.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 528.0
+grow_horizontal = 0
+texture = SubResource("GradientTexture2D_jbu5y")
 
-[node name="Label" type="Label" parent="GUI/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI/Manifest"]
+layout_mode = 0
+offset_right = 152.0
+offset_bottom = 43.0
+theme_override_constants/separation = 8
+
+[node name="Manifest Entry" type="RichTextLabel" parent="GUI/Manifest/VBoxContainer"]
+custom_minimum_size = Vector2(192, 32)
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-text = "Hello World"
+theme = ExtResource("10_pa486")
+bbcode_enabled = true
+text = "[s][shake rate=2 level=2]12345678[/shake][s]"
+
+[node name="Standing Areas" type="Node2D" parent="."]
+
+[node name="1" type="Node2D" parent="Standing Areas"]
+position = Vector2(192, 576)
+
+[node name="2" type="Node2D" parent="Standing Areas"]
+position = Vector2(192, 512)
+
+[node name="3" type="Node2D" parent="Standing Areas"]
+position = Vector2(192, 448)
+
+[node name="4" type="Node2D" parent="Standing Areas"]
+position = Vector2(192, 384)
+
+[node name="5" type="Node2D" parent="Standing Areas"]
+position = Vector2(192, 320)

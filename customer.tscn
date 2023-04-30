@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dp1m4rdqo6i2u"]
+[gd_scene load_steps=7 format=3 uid="uid://dp1m4rdqo6i2u"]
 
 [ext_resource type="Script" path="res://Customer.gd" id="1_vl338"]
 [ext_resource type="Texture2D" uid="uid://cit8nqxxv24u7" path="res://sprites/blockhead2.png" id="2_frt5i"]
@@ -7,6 +7,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q1fo6"]
 size = Vector2(96, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51u4f"]
+size = Vector2(96, 32)
 
 [node name="Customer" type="Area2D"]
 script = ExtResource("1_vl338")
@@ -43,3 +46,11 @@ bbcode_enabled = true
 text = "[center][shake rate=8 level=8]I'm here for the [color=#007700]green[/color] box.[/shake][center]"
 scroll_active = false
 visible_characters_behavior = 1
+
+[node name="Pickup Zone" type="Area2D" parent="."]
+position = Vector2(96, 0)
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup Zone"]
+shape = SubResource("RectangleShape2D_51u4f")
