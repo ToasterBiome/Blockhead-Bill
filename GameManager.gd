@@ -2,6 +2,7 @@ extends Node2D
 class_name GameManager
 
 @onready var spawn_area = $"Box Spawn"
+@onready var customer_spawn_area = $"Door Spawn"
 
 @onready var box_spawn_timer = $"Timers/Box Spawn Timer"
 @onready var customer_spawn_timer = $"Timers/Customer Spawn Timer"
@@ -100,6 +101,7 @@ func spawn_customer():
 	customer.connect("on_customer_got_correct_package", Callable(self, "_on_customer_got_correct_package").bind(customer))
 	customer.connect("on_customer_leave", Callable(self,"_on_customer_leave"))
 	add_child(customer)
+	customer.position = customer_spawn_area.position
 	customer.move_to(drop_area.position)
 	customers_around += 1
 	

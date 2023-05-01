@@ -33,13 +33,13 @@ physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_eeai7")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5205"]
-size = Vector2(768, 16)
+size = Vector2(896, 16)
 
 [sub_resource type="Gradient" id="Gradient_wh22a"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_r32x7"]
 gradient = SubResource("Gradient_wh22a")
-width = 768
+width = 896
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oivyt"]
 size = Vector2(64, 8)
@@ -147,7 +147,7 @@ scale = Vector2(2, 2)
 texture = ExtResource("4_0qoy7")
 
 [node name="Conveyor Belt" type="Area2D" parent="."]
-position = Vector2(896, 285)
+position = Vector2(960, 285)
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("17_purh3")
@@ -161,7 +161,7 @@ modulate = Color(1, 1, 1, 0.427451)
 texture = SubResource("GradientTexture2D_r32x7")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Conveyor Belt"]
-position = Vector2(-372, 0)
+position = Vector2(-436, 0)
 collision_layer = 8
 collision_mask = 2
 
@@ -191,7 +191,10 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_fo24l")
 
 [node name="Box Spawn" type="Node2D" parent="."]
-position = Vector2(1251, 277)
+position = Vector2(1344, 288)
+
+[node name="Door Spawn" type="Node2D" parent="."]
+position = Vector2(128, 256)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
