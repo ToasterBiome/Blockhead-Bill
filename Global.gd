@@ -1,15 +1,14 @@
 extends Node
 
-var player: CharacterBody2D
-
 var box_sprites: Dictionary = {
 	"normal": preload("res://sprites/box1.png"),
 	"long": preload("res://sprites/box2.png"),
 	"tall": preload("res://sprites/box3.png"),
 	"fucked": preload("res://sprites/box4.png"),
 	"small": preload("res://sprites/box5.png"),
-	"idk": preload("res://sprites/box6.png"),
-	"v. tall": preload("res://sprites/box7.png"),
+	"thin": preload("res://sprites/box6.png"),
+	"L": preload("res://sprites/box7.png"),
+	"slanted": preload("res://sprites/box8.png")
 	}
 	
 var box_colors = {
@@ -26,6 +25,16 @@ var customer_list = [
 	preload("res://customers/robot.tres"),
 	preload("res://customers/wizard.tres")
 ]
+
+var levels = [
+	preload("res://levels/1.tres"),
+	preload("res://levels/2.tres"),
+	preload("res://levels/3.tres"),
+	preload("res://levels/4.tres"),
+	preload("res://levels/5.tres")
+]
+
+var level = 1
 
 var random_characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ012345678"
 

@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 class_name Customer
 
 @onready var speech_bubble: Node2D = $"Speech Bubble"
@@ -15,7 +15,8 @@ var text_tween: Tween
 
 var wanted_package: Pickupable
 
-var got_package = false
+var interaction_done = false
+var mad = false
 
 signal on_move_complete
 
@@ -24,7 +25,10 @@ var package_description: String = "asdasdasdasd"
 var data: CustomerData
 
 signal on_customer_got_correct_package
+signal on_customer_got_incorrect_package
 signal on_customer_leave
+
+var strikes: int = 0
 
 func _ready():
 	speech_bubble.hide()
@@ -51,19 +55,19 @@ func _process(delta):
 			emit_signal("on_move_complete")
 			
 func _set_description():
-	match(randi_range(1,2)):
-		1: #COLOR
+	match(randi_range(1,10)):
+		1,2,3,4: #COLOR
 			var color_string = Global.box_colors[wanted_package.data.color]
-			package_description = "I'm here for the %s package." % color_string
-		2: #SIZE
-			package_description = "I'm here for the %s package." % wanted_package.data.size
-		3: #SERIAL NUMBER
-			package_description = "I'm here for package %s." % wanted_package.data.serial_number
+			package_description = "I'm here for the %s box." % color_string
+		5,6,7,8,9: #SIZE
+			package_description = "I'm here for the %s box." % wanted_package.data.size
+		10: #SERIAL NUMBER
+			package_description = "I'm here for box %s." % wanted_package.data.serial_number
 
 func move_to(destination: Vector2):
 	destination_position = destination
 	moving = true
-	if(got_package):
+	if(interaction_done && !mad):
 		sprite.animation = "happy"
 	else:
 		sprite.animation = "idle"
@@ -88,34 +92,59 @@ func set_text(text: String):
 	text_tween.tween_property(speech_text, "visible_ratio", 1, 0.5)
 	
 func get_package_and_leave():
-	if(got_package):
+	if(interaction_done):
 		return
-	got_package = true
+	interaction_done = true
 	emit_signal("on_customer_got_correct_package")
-	set_text("ok this is my package")
 	speech_bubble.show()
+	set_text("ok this is my package")
 	wanted_package.get_parent().remove_child(wanted_package)
 	add_child(wanted_package)
 	wanted_package.position = Vector2.ZERO
 	wanted_package.collider.disabled = true
-	move_to(Vector2.ZERO)
+	leave()
+	
+func leave_angry():
+	if(interaction_done):
+		return
+	interaction_done = true
+	emit_signal("on_customer_got_incorrect_package")
+	#wanted_package.poof()
+	wanted_package.get_parent().remove_child(wanted_package) #move the package to the shadow realm
+	leave()
+	
+func leave():
+	move_to(Vector2(96,256))
 	await on_move_complete
 	Global.boxes.erase(wanted_package)
 	emit_signal("on_customer_leave")
 	queue_free()
 	
 func check_box(box: Node2D):
-	print("WHAT: " + box.name)
+	print(box.name)
+	if(box.collider.disabled): #very cool godot bug
+		print("DISABLED")
+		return
 	if(box == wanted_package):
 		call_deferred("get_package_and_leave")
-	set_text("this isn't my package!")
-	
-func clear_box(_box: Node2D):
-	if(got_package):
 		set_text("Thanks.")
 		await get_tree().create_timer(1.5).timeout
 		speech_bubble.hide()
 	else:
+		strikes += 1
+		if(strikes < 3):
+			set_text("this isn't my package.")
+		else:
+			set_text("for the last time, this isn't my package!")
+		if(strikes > 3):
+			call_deferred("leave_angry")
+			mad = true
+			set_text("Fucking idiot.")
+			await get_tree().create_timer(1.5).timeout
+			speech_bubble.hide()
+	
+func clear_box(_box: Node2D):
+	if(!interaction_done):
 		set_text(package_description)
 		
 func set_data(data: CustomerData):

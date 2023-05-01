@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://i30oqed870qx" path="res://sprites/box1.png" id="2_a3m0u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w4you"]
-size = Vector2(64, 64)
+size = Vector2(96, 64)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cvkv1"]
 shader = ExtResource("2_1sotc")
@@ -28,5 +28,5 @@ shape = SubResource("RectangleShape2D_w4you")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_cvkv1")
-scale = Vector2(0.075, 0.075)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_a3m0u")

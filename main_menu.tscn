@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1dnw1d8sdf7b"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_hum34"]
+[ext_resource type="Theme" uid="uid://dy3s2gjdlontx" path="res://top_ui.tres" id="1_k0tsu"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hum34")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Start Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -24.0
+offset_right = 52.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_k0tsu")
+text = "BEGIN"
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

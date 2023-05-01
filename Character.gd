@@ -9,7 +9,6 @@ var boxes_around: Array[RigidBody2D]
 var can_move: bool = false
 
 func _ready():
-	Global.player = self
 	grabArea.connect("body_entered", Callable(self, "_on_area_entered"))
 	grabArea.connect("body_exited", Callable(self, "_on_area_exited"))
 	$"..".connect("on_game_state_changed",Callable(self,"on_game_state_changed"))
@@ -43,7 +42,7 @@ func _process(_delta):
 
 	move_and_slide()
 	
-	if(Input.is_action_just_pressed("mouse_left")):
+	if(can_move && Input.is_action_just_pressed("mouse_left")):
 		if(held_item == null):
 			pickup_item()
 		else:
@@ -65,10 +64,15 @@ func pickup_item():
 	if(!best_box):
 		return
 	held_item = best_box
-	held_item.get_parent().remove_child(held_item)
-	add_child(held_item)
-	held_item.position = Vector2(sign(float(sprite.flip_h) - 0.5) * 64, 0)
+	print("a")
 	held_item.on_pickup()
+	print("b")
+	held_item.get_parent().remove_child(held_item)
+	print("c")
+	add_child(held_item)
+	print("d")
+	held_item.position = Vector2(sign(float(sprite.flip_h) - 0.5) * 64, 0)
+	print("e")
 	boxes_around.erase(held_item)
 	held_item.deselect()
 	
