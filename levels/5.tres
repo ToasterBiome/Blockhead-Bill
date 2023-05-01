@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="LevelData" load_steps=2 format=3 uid="uid://djeptg181l6ae"]
+
+[ext_resource type="Script" path="res://LevelData.gd" id="1_wwtau"]
+
+[resource]
+script = ExtResource("1_wwtau")
+packages = 15
+seconds = 60

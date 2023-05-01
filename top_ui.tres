@@ -4,6 +4,11 @@
 [ext_resource type="FontFile" uid="uid://crppu31lkl0yn" path="res://fonts/BadComic-Regular.ttf" id="2_wmwin"]
 
 [resource]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/constants/outline_size = 8
+Button/font_sizes/font_size = 32
+Button/fonts/font = ExtResource("2_wmwin")
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/constants/outline_size = 16
 Label/font_sizes/font_size = 32

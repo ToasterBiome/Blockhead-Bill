@@ -1,13 +1,17 @@
-[gd_scene load_steps=32 format=3 uid="uid://dfg0rwoedr7fq"]
+[gd_scene load_steps=35 format=3 uid="uid://dfg0rwoedr7fq"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_8coj5"]
 [ext_resource type="Script" path="res://Character.gd" id="1_hyaq0"]
 [ext_resource type="Texture2D" uid="uid://bddxha0ukbdln" path="res://sprites/floor.png" id="1_jle0j"]
-[ext_resource type="Texture2D" uid="uid://byp3ojkyy6pqj" path="res://sprites/background.png" id="4_0qoy7"]
 [ext_resource type="Texture2D" uid="uid://coie2lt4ypk7s" path="res://sprites/blockhead1.png" id="4_hujye"]
+[ext_resource type="Texture2D" uid="uid://ctx57h4cnd8yk" path="res://sprites/officetopwall.png" id="4_lf5hc"]
 [ext_resource type="Texture2D" uid="uid://cit8nqxxv24u7" path="res://sprites/blockhead2.png" id="4_odj28"]
+[ext_resource type="Texture2D" uid="uid://cvc7lu0ht5j6x" path="res://sprites/newbelt.png" id="5_6ypkr"]
 [ext_resource type="Texture2D" uid="uid://mlgmate7l8tb" path="res://sprites/debug_tile.png" id="6_0cq4q"]
+[ext_resource type="Texture2D" uid="uid://cyhebc84dddl" path="res://sprites/officecounter.png" id="6_8wmd1"]
+[ext_resource type="Texture2D" uid="uid://b1hufc5jn0bj3" path="res://sprites/newbbackwall.png" id="6_ugqyu"]
 [ext_resource type="Texture2D" uid="uid://ce56e6fwiahcb" path="res://sprites/blockhead3.png" id="6_y4747"]
+[ext_resource type="Texture2D" uid="uid://d1xlsqc0ooa2" path="res://sprites/officecountertop.png" id="7_cu21s"]
 [ext_resource type="Texture2D" uid="uid://b8ek6c5bloja1" path="res://sprites/blockheadcarry2.png" id="8_50i7b"]
 [ext_resource type="Theme" uid="uid://buudspsmq6qqx" path="res://game_theme.tres" id="10_pa486"]
 [ext_resource type="Texture2D" uid="uid://c7gba2tcg5xjt" path="res://sprites/blockheadcarry1.png" id="11_w51pe"]
@@ -35,17 +39,11 @@ sources/1 = SubResource("TileSetAtlasSource_eeai7")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a5205"]
 size = Vector2(896, 16)
 
-[sub_resource type="Gradient" id="Gradient_wh22a"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_r32x7"]
-gradient = SubResource("Gradient_wh22a")
-width = 896
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oivyt"]
 size = Vector2(64, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bx7b8"]
-size = Vector2(96, 96)
+size = Vector2(96, 160)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ykr2d"]
 animations = [{
@@ -103,6 +101,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_fo24l"]
 radius = 96.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aphic"]
+size = Vector2(104, 72)
+
 [sub_resource type="Gradient" id="Gradient_8tyj0"]
 colors = PackedColorArray(1, 0.776471, 0.768627, 1, 1, 1, 0.92549, 1)
 
@@ -137,28 +138,41 @@ scale = Vector2(2, 2)
 texture = ExtResource("1_jle0j")
 
 [node name="TileMap" type="TileMap" parent="."]
+visible = false
 tile_set = SubResource("TileSet_shugu")
 format = 2
 layer_0/tile_data = PackedInt32Array(262148, 1, 0, 327684, 1, 0, 393220, 1, 0, 458756, 1, 0, 524292, 1, 0, 589828, 1, 0, 589829, 1, 0, 524293, 1, 0, 458757, 1, 0, 393221, 1, 0, 327685, 1, 0, 262149, 1, 0, 655364, 1, 0, 655365, 1, 0, 720911, 1, 0, 720910, 1, 0, 720909, 1, 0, 720908, 1, 0, 720907, 1, 0, 720906, 1, 0, 720905, 1, 0, 720904, 1, 0, 720903, 1, 0, 720902, 1, 0, 720901, 1, 0, 720900, 1, 0, 720899, 1, 0, 196612, 1, 0, 196613, 1, 0, 196627, 1, 0, 131091, 1, 0, 131090, 1, 0, 131089, 1, 0, 131088, 1, 0, 131087, 1, 0, 131086, 1, 0, 131085, 1, 0, 131084, 1, 0, 131083, 1, 0, 131082, 1, 0, 131081, 1, 0, 131080, 1, 0, 131079, 1, 0, 131078, 1, 0, 131077, 1, 0, 131076, 1, 0, 131075, 1, 0, 131074, 1, 0, 131073, 1, 0, 131072, 1, 0, 196608, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 65537, 1, 0, 65536, 1, 0, 65538, 1, 0, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 1, 0, 65543, 1, 0, 65544, 1, 0, 65545, 1, 0, 65546, 1, 0, 65547, 1, 0, 65548, 1, 0, 65549, 1, 0, 65550, 1, 0, 65551, 1, 0, 65552, 1, 0, 65553, 1, 0, 65554, 1, 0, 65555, 1, 0, 19, 1, 0, 18, 1, 0, 17, 1, 0, 16, 1, 0, 15, 1, 0, 14, 1, 0, 13, 1, 0, 12, 1, 0, 11, 1, 0, 10, 1, 0, 9, 1, 0, 8, 1, 0, 7, 1, 0, 6, 1, 0, 5, 1, 0, 4, 1, 0, 3, 1, 0, 2, 1, 0, 1, 1, 0, 0, 1, 0, 720915, 1, 0, 720914, 1, 0, 720913, 1, 0, 720912, 1, 0, 589843, 1, 0, 524307, 1, 0, 458771, 1, 0, 393235, 1, 0, 327699, 1, 0, 262163, 1, 0, 655376, 1, 0, 655377, 1, 0, 655378, 1, 0, 655379, 1, 0, 655375, 1, 0, 655374, 1, 0, 655373, 1, 0, 655372, 1, 0, 655371, 1, 0, 655370, 1, 0, 655369, 1, 0, 655368, 1, 0, 655367, 1, 0, 655366, 1, 0)
 
 [node name="Overlay" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
-scale = Vector2(2, 2)
-texture = ExtResource("4_0qoy7")
+texture = ExtResource("4_lf5hc")
+
+[node name="Overlay2" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+texture = ExtResource("5_6ypkr")
+
+[node name="Overlay5" type="Sprite2D" parent="."]
+z_index = 720
+position = Vector2(640, 360)
+texture = ExtResource("6_ugqyu")
+
+[node name="Overlay3" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+texture = ExtResource("6_8wmd1")
+
+[node name="Overlay4" type="Sprite2D" parent="."]
+z_index = 721
+position = Vector2(640, 360)
+texture = ExtResource("7_cu21s")
 
 [node name="Conveyor Belt" type="Area2D" parent="."]
-position = Vector2(960, 285)
+position = Vector2(960, 240)
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("17_purh3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor Belt"]
-position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_a5205")
-
-[node name="Sprite2D" type="Sprite2D" parent="Conveyor Belt"]
-modulate = Color(1, 1, 1, 0.427451)
-texture = SubResource("GradientTexture2D_r32x7")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Conveyor Belt"]
 position = Vector2(-436, 0)
@@ -190,11 +204,16 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Character/Area2D"]
 shape = SubResource("CircleShape2D_fo24l")
 
-[node name="Box Spawn" type="Node2D" parent="."]
-position = Vector2(1344, 288)
+[node name="Box Spawn" type="Area2D" parent="."]
+position = Vector2(1344, 224)
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box Spawn"]
+shape = SubResource("RectangleShape2D_aphic")
 
 [node name="Door Spawn" type="Node2D" parent="."]
-position = Vector2(128, 256)
+position = Vector2(96, 256)
 
 [node name="GUI" type="CanvasLayer" parent="."]
 
@@ -270,9 +289,10 @@ theme_override_constants/separation = 8
 
 [node name="WASD Icon" type="TextureRect" parent="GUI/Controls/WASD"]
 texture_filter = 1
-custom_minimum_size = Vector2(62, 44)
+custom_minimum_size = Vector2(128, 64)
 layout_mode = 2
 texture = ExtResource("16_pw6bb")
+expand_mode = 5
 
 [node name="WASD Label" type="Label" parent="GUI/Controls/WASD"]
 custom_minimum_size = Vector2(31, 19)
@@ -286,9 +306,10 @@ theme_override_constants/separation = 8
 
 [node name="Pickup Icon" type="TextureRect" parent="GUI/Controls/Pickup"]
 texture_filter = 1
-custom_minimum_size = Vector2(48, 44)
+custom_minimum_size = Vector2(128, 64)
 layout_mode = 2
 texture = ExtResource("17_xr435")
+expand_mode = 3
 
 [node name="Pickup Label" type="Label" parent="GUI/Controls/Pickup"]
 custom_minimum_size = Vector2(31, 19)
@@ -302,9 +323,10 @@ theme_override_constants/separation = 8
 
 [node name="Manifest Icon" type="TextureRect" parent="GUI/Controls/Manifest"]
 texture_filter = 1
-custom_minimum_size = Vector2(46, 44)
+custom_minimum_size = Vector2(128, 64)
 layout_mode = 2
 texture = ExtResource("18_suq7i")
+expand_mode = 3
 
 [node name="Manifest Label" type="Label" parent="GUI/Controls/Manifest"]
 custom_minimum_size = Vector2(31, 19)
@@ -314,7 +336,7 @@ text = "Open/Close Manifest"
 
 [node name="Black Screen" type="TextureRect" parent="GUI"]
 visible = false
-modulate = Color(1, 1, 1, 0.784314)
+self_modulate = Color(1, 1, 1, 0.682353)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -360,19 +382,77 @@ bbcode_enabled = true
 text = "[center][color=#FF0000]You have been fired for 
 getting 23 seconds of overtime.[/color][/center]"
 
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/Black Screen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = 32.0
+offset_right = 256.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Win Main Menu" type="Button" parent="GUI/Black Screen/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("15_sl0w8")
+text = "Main Menu"
+
+[node name="Win Next Level" type="Button" parent="GUI/Black Screen/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("15_sl0w8")
+text = "Next Level"
+
+[node name="Solo Main Menu" type="Button" parent="GUI/Black Screen"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -85.5
+offset_top = 40.0
+offset_right = 85.5
+offset_bottom = 88.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("15_sl0w8")
+text = "Main Menu"
+
+[node name="Fade Screen" type="ColorRect" parent="GUI"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
 [node name="Standing Areas" type="Node2D" parent="."]
 
 [node name="1" type="Node2D" parent="Standing Areas"]
-position = Vector2(192, 576)
+position = Vector2(192, 544)
 
 [node name="2" type="Node2D" parent="Standing Areas"]
-position = Vector2(192, 512)
+position = Vector2(192, 480)
 
 [node name="3" type="Node2D" parent="Standing Areas"]
-position = Vector2(192, 448)
+position = Vector2(192, 416)
 
 [node name="4" type="Node2D" parent="Standing Areas"]
-position = Vector2(192, 384)
+position = Vector2(192, 352)
 
 [node name="5" type="Node2D" parent="Standing Areas"]
-position = Vector2(192, 320)
+position = Vector2(192, 288)
