@@ -3,6 +3,7 @@ class_name Pickupable
 
 @onready var collider: CollisionShape2D = $CollisionShape2D
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var sticker: Sprite2D = $Sticker
 
 var held: bool = false
 
@@ -13,6 +14,10 @@ func _ready():
 	sprite.material = sprite.material.duplicate()
 	Global.boxes.append(self)
 	Global.available_boxes.append(self)
+	if(randi_range(0,3) > 1):
+		sticker.texture = Global.box_stickers.pick_random()
+		sticker.rotation = randi_range(1,360)
+		sticker.position = Vector2(randi_range(-4,4),randi_range(-4,4))
 	
 func on_pickup():
 	held = true

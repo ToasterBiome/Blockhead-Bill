@@ -11,6 +11,15 @@ var box_sprites: Dictionary = {
 	"slanted": preload("res://sprites/box8.png")
 	}
 	
+var box_stickers = [
+	preload("res://sprites/label1.png"),
+	preload("res://sprites/label2.png"),
+	preload("res://sprites/label3.png"),
+	preload("res://sprites/label4.png"),
+	preload("res://sprites/label5.png"),
+	preload("res://sprites/label6.png"),
+]
+	
 var box_colors = {
 	Color.RED: "red",
 	Color.GREEN: "green",

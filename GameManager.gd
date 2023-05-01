@@ -1,7 +1,7 @@
 extends Node2D
 class_name GameManager
 
-@onready var spawn_area = $"Box Spawn"
+@onready var spawn_area: Area2D = $"Box Spawn"
 @onready var customer_spawn_area = $"Door Spawn"
 
 @onready var box_spawn_timer = $"Timers/Box Spawn Timer"
@@ -54,6 +54,7 @@ enum GameState {
 
 var game_state: GameState = GameState.GAME_START: set = set_game_state
 signal on_game_state_changed(new_state)
+var can_spawn_box = true
 
 func _ready():
 	generate_boxes(Global.levels[Global.level - 1].packages)
@@ -63,6 +64,7 @@ func _ready():
 	box_spawn_timer.connect("timeout", Callable(self, "spawn_box"))
 	box_spawn_timer.start()
 	customer_spawn_timer.connect("timeout", Callable(self, "spawn_customer"))
+	customer_spawn_timer.start()
 	_update_time()
 	clock_timer.connect("timeout", Callable(self, "_on_clock_changed"))
 	clock_timer.start()
@@ -71,6 +73,7 @@ func _ready():
 	win_menu_button.connect("pressed",Callable(self,"_go_to_scene").bind("res://main_menu.tscn"))
 	solo_menu_button.connect("pressed",Callable(self,"_go_to_scene").bind("res://main_menu.tscn"))
 	win_next_level_button.connect("pressed",Callable(self,"_next_level"))
+	spawn_area.connect("body_exited",Callable(self,"_on_box_clear_conveyer"))
 	
 	fade_screen.modulate = Color.BLACK
 	var tween: Tween = get_tree().create_tween()
@@ -93,6 +96,9 @@ func make_manifest():
 	pass
 	
 func spawn_box():
+	if(!can_spawn_box):
+		return
+	can_spawn_box = false
 	var box_to_spawn = boxes_to_spawn[0]
 	boxes_to_spawn.erase(box_to_spawn)
 	var box = box_scene.instantiate()
@@ -101,7 +107,6 @@ func spawn_box():
 	box.data = box_to_spawn
 	if(boxes_to_spawn.size() == 0):
 		box_spawn_timer.stop()
-		customer_spawn_timer.start()
 		
 func get_clear_drop_area():
 	if(customers_waiting.size() >= standing_areas.size()):
@@ -131,7 +136,7 @@ func _on_customer_got_incorrect_package(customer: Customer):
 	move_customers_up(customer)
 	write_ups += 1
 	if(write_ups > 3):
-		_game_over("You got written up too many times.")
+		_game_over("You were fired for being written up too many times.")
 			
 func move_customers_up(customer_to_remove: Customer):
 	print("moving")
@@ -160,7 +165,7 @@ func _update_time():
 	var formatted_string: String = "%01d:%02d" % [minutes, seconds]
 	time_text.text = formatted_string + " until overtime"
 	if(time_left <= 0):
-		_game_over("Ran out of time")
+		_game_over("You were fired for getting 23 seconds of overtime.")
 		
 func _game_over(reason: String):
 	clock_timer.stop()
@@ -210,3 +215,7 @@ func _go_to_scene(scene):
 func _next_level():
 	Global.level += 1
 	_go_to_scene("res://main_game.tscn")
+	
+func _on_box_clear_conveyer(_body: Node2D):
+	print("passed")
+	can_spawn_box = true

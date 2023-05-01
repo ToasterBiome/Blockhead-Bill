@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_35bp5")
-packages = 1
+packages = 5
 seconds = 120

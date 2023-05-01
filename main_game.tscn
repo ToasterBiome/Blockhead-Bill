@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dfg0rwoedr7fq"]
+[gd_scene load_steps=35 format=3 uid="uid://dfg0rwoedr7fq"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_8coj5"]
 [ext_resource type="Script" path="res://Character.gd" id="1_hyaq0"]
@@ -101,6 +101,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_fo24l"]
 radius = 96.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aphic"]
+size = Vector2(104, 72)
+
 [sub_resource type="Gradient" id="Gradient_8tyj0"]
 colors = PackedColorArray(1, 0.776471, 0.768627, 1, 1, 1, 0.92549, 1)
 
@@ -169,7 +172,6 @@ collision_mask = 2
 script = ExtResource("17_purh3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Conveyor Belt"]
-position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_a5205")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Conveyor Belt"]
@@ -202,8 +204,13 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Character/Area2D"]
 shape = SubResource("CircleShape2D_fo24l")
 
-[node name="Box Spawn" type="Node2D" parent="."]
+[node name="Box Spawn" type="Area2D" parent="."]
 position = Vector2(1344, 224)
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box Spawn"]
+shape = SubResource("RectangleShape2D_aphic")
 
 [node name="Door Spawn" type="Node2D" parent="."]
 position = Vector2(96, 256)

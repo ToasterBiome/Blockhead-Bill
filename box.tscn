@@ -15,7 +15,7 @@ shader_parameter/line_thickness = 32.0
 [node name="Box" type="RigidBody2D"]
 position = Vector2(129, 106)
 collision_layer = 2
-collision_mask = 10
+collision_mask = 26
 input_pickable = true
 mass = 100.0
 gravity_scale = 0.0
@@ -30,3 +30,6 @@ shape = SubResource("RectangleShape2D_w4you")
 material = SubResource("ShaderMaterial_cvkv1")
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_a3m0u")
+
+[node name="Sticker" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
