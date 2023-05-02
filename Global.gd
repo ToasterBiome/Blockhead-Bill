@@ -1,6 +1,6 @@
 extends Node
 
-var version = 0.7
+var version = 1.1
 var box_sprites: Dictionary = {
 	"normal": preload("res://sprites/box1.png"),
 	"long": preload("res://sprites/box2.png"),

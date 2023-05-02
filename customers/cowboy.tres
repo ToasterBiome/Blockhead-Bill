@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="CustomerData" load_steps=10 format=3 uid="uid://c345t073f2q7k"]
 
 [ext_resource type="Script" path="res://CustomerData.gd" id="1_aj2yg"]
-[ext_resource type="Texture2D" uid="uid://c2sa6g2dhlvs3" path="res://sprites/wizardidle1.png" id="1_knycl"]
-[ext_resource type="Texture2D" uid="uid://c45m5i1qul7p3" path="res://sprites/wizardhappy.png" id="1_y6gkc"]
-[ext_resource type="Texture2D" uid="uid://b4pd8xi2yr68o" path="res://sprites/wizardidle2.png" id="2_tlcog"]
-[ext_resource type="Texture2D" uid="uid://lvum3q5neqtu" path="res://sprites/wizardtalk1.png" id="3_3s4sv"]
-[ext_resource type="Texture2D" uid="uid://drta7idg2rbhv" path="res://sprites/wizardtalk2.png" id="4_3ux5i"]
+[ext_resource type="Texture2D" uid="uid://dsagr1gt140ak" path="res://sprites/cowboyhappy.png" id="1_ke2rk"]
+[ext_resource type="Texture2D" uid="uid://cykk1850aefjq" path="res://sprites/cowboyidle1.png" id="2_04sy6"]
+[ext_resource type="Texture2D" uid="uid://0hre87di8c12" path="res://sprites/cowboyidle2.png" id="3_1jww0"]
+[ext_resource type="Texture2D" uid="uid://cu1ld3fsm5fi2" path="res://sprites/cowboytalk1.png" id="4_84th4"]
+[ext_resource type="Texture2D" uid="uid://clvq1o2lc567u" path="res://sprites/cowboytalk2.png" id="5_ciyib"]
 [ext_resource type="Texture2D" uid="uid://cxall1xom7jfv" path="res://sprites/cowboyitem.png" id="6_t8htb"]
 [ext_resource type="Texture2D" uid="uid://coau1ibp7uq4s" path="res://sprites/cowboypic.png" id="7_lr14q"]
 
@@ -13,18 +13,18 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_y6gkc")
+"texture": ExtResource("1_ke2rk")
 }],
 "loop": true,
 "name": &"happy",
-"speed": 5.0
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_knycl")
+"texture": ExtResource("2_04sy6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_tlcog")
+"texture": ExtResource("3_1jww0")
 }],
 "loop": true,
 "name": &"idle",
@@ -32,10 +32,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_3s4sv")
+"texture": ExtResource("4_84th4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_3ux5i")
+"texture": ExtResource("5_ciyib")
 }],
 "loop": true,
 "name": &"talk",
