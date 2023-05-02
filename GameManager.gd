@@ -218,6 +218,7 @@ func _win():
 	_show_review()
 	
 func _go_to_scene(scene):
+	Global.cleanup()
 	if(fade_tween):
 		return
 	fade_tween = get_tree().create_tween()
@@ -228,7 +229,7 @@ func _go_to_scene(scene):
 	get_tree().change_scene_to_file(scene)
 	
 func _next_level():
-	Global.level += 1
+	Global.level = min(Global.level + 1, Global.levels.size())
 	_go_to_scene("res://main_game.tscn")
 	
 func _on_box_clear_conveyer(_body: Node2D):

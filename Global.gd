@@ -1,6 +1,6 @@
 extends Node
 
-var version = 1.3
+var version = 1.4
 var box_sprites: Dictionary = {
 	"normal": preload("res://sprites/box1.png"),
 	"long": preload("res://sprites/box2.png"),
@@ -59,3 +59,8 @@ func get_serial_number(length: int):
 	for n in length:
 		result += random_characters[randi() % random_characters.length()]
 	return result
+	
+func cleanup():
+	boxes.clear()
+	available_boxes.clear()
+	selected_customers.clear()
