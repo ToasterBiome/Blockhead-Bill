@@ -48,6 +48,7 @@ var time_left = 120 #in seconds
 @onready var review_label: Label = $"GUI/Black Screen/Review/Review Text"
 @onready var username_label: Label = $"GUI/Black Screen/Review/Username"
 
+@onready var music: AudioStreamPlayer = $Music
 var fade_tween: Tween
 
 enum GameState {
@@ -64,6 +65,9 @@ var can_spawn_box = true
 
 func _ready():
 	randomize()
+	music.volume_db = -80
+	var music_tween: Tween = get_tree().create_tween()
+	music_tween.tween_property(music,"volume_db", -35, 4.0)
 	generate_boxes(Global.levels[Global.level - 1].packages)
 	time_left = Global.levels[Global.level - 1].seconds
 	day_text.text = "Day " + str(Global.levels[Global.level - 1].level_name)
@@ -218,6 +222,8 @@ func _go_to_scene(scene):
 		return
 	fade_tween = get_tree().create_tween()
 	fade_tween.tween_property(fade_screen,"modulate",Color.BLACK,1.0)
+	var music_tween: Tween = get_tree().create_tween()
+	music_tween.tween_property(music,"volume_db", -80, 1.0)
 	await fade_tween.finished
 	get_tree().change_scene_to_file(scene)
 	

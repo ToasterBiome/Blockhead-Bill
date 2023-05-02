@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dfg0rwoedr7fq"]
+[gd_scene load_steps=38 format=3 uid="uid://dfg0rwoedr7fq"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_8coj5"]
 [ext_resource type="Script" path="res://Character.gd" id="1_hyaq0"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://bb8cpvx0s8e15" path="res://sprites/controls/tab.png" id="18_suq7i"]
 [ext_resource type="Texture2D" uid="uid://bud0b6aqpddjv" path="res://sprites/controls/personclick.png" id="22_53itn"]
 [ext_resource type="Texture2D" uid="uid://b41eujst1ythu" path="res://sprites/astropic.png" id="24_8ay72"]
+[ext_resource type="AudioStream" uid="uid://2fp5n3art8d2" path="res://music/gone_fishin_by_memoraphile_CC0.mp3" id="25_ehc65"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eeai7"]
 texture = ExtResource("6_0cq4q")
@@ -522,3 +523,8 @@ position = Vector2(192, 352)
 
 [node name="5" type="Node2D" parent="Standing Areas"]
 position = Vector2(192, 288)
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_ehc65")
+volume_db = -25.0
+autoplay = true

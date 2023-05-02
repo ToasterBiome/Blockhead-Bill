@@ -81,14 +81,13 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "VERSION"
 
 [node name="Credits" type="ColorRect" parent="CanvasLayer"]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -256.0
 offset_top = 32.0
 offset_right = 256.0
-offset_bottom = 352.0
+offset_bottom = 416.0
 grow_horizontal = 2
 color = Color(0.0156863, 0.0156863, 0.0156863, 0.54902)
 
@@ -116,8 +115,9 @@ Alex Hartman - Testing
 [u]Testers:[/u]
 Lil E, Lazenn, Chubbygummibear, Xoxeyos
 [u]Assets:[/u]
-[url=https://github.com/GDQuest/godot-shaders/blob/master/godot/Shaders/outline2D_outer.shader]Outline Shader[/url] by GD Quest
+[url=https://github.com/GDQuest/godot-shaders/blob/master/godot/Shaders/outline2D_outer.shader]Outline Shader[/url] by GDQuest
 [url=https://www.dafont.com/bad-comic.font]Bad Comic[/url] by GGBotNet
+[url=https://opengameart.org/content/gone-fishin]Gone Fishin'[/url] by Memoraphile @ You're Perfect Studio
 [/shake]"
 script = ExtResource("5_dvtem")
 
