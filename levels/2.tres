@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_q6ntf")
+level_name = "2"
 packages = 7
 seconds = 110

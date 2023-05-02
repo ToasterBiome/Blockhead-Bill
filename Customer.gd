@@ -12,6 +12,7 @@ var moving: bool = false
 var destination_position: Vector2
 
 var text_tween: Tween
+@onready var text_timer: Timer = $"Text Timer"
 
 var wanted_package: Pickupable
 
@@ -30,15 +31,20 @@ signal on_customer_leave
 
 var strikes: int = 0
 
+var selected: bool = false
+var can_interact: bool = false
+
 func _ready():
 	speech_bubble.hide()
 	wanted_package = Global.available_boxes.pick_random()
 	Global.available_boxes.erase(wanted_package)
 	_set_description()
 	set_data(Global.customer_list.pick_random())
-	pickup_area.connect("body_entered", Callable(self,"check_box"))
-	pickup_area.connect("body_exited", Callable(self,"clear_box"))
+	pickup_area.connect("mouse_entered", Callable(self, "_on_hover").bind(true))
+	pickup_area.connect("mouse_exited", Callable(self, "_on_hover").bind(false))
+	sprite.material = sprite.material.duplicate()
 	await on_move_complete
+	can_interact = true
 	speech_bubble.show()
 	set_text(package_description)
 	
@@ -76,7 +82,7 @@ func move_to(destination: Vector2):
 	sprite.animation = "talk"
 	sprite.play()
 	
-func set_text(text: String):
+func set_text(text: String, timed: bool = false):
 	speech_text.clear()
 	speech_text.append_text("[center]")
 	speech_text.append_text("[shake rate=8 level=8]")
@@ -90,6 +96,15 @@ func set_text(text: String):
 		text_tween.kill()
 	text_tween = get_tree().create_tween()
 	text_tween.tween_property(speech_text, "visible_ratio", 1, 0.5)
+	if(timed):
+		if(!text_timer.is_stopped()):
+			text_timer.stop()
+		text_timer.start(1.5)
+		clear_text()
+
+func clear_text():
+	await text_timer.timeout
+	speech_bubble.hide()
 	
 func get_package_and_leave():
 	if(interaction_done):
@@ -100,7 +115,8 @@ func get_package_and_leave():
 	set_text("ok this is my package")
 	wanted_package.get_parent().remove_child(wanted_package)
 	add_child(wanted_package)
-	wanted_package.position = Vector2.ZERO
+	wanted_package.position = Vector2(64,-16)
+	wanted_package.open(data.item_sprite)
 	wanted_package.collider.disabled = true
 	leave()
 	
@@ -109,7 +125,8 @@ func leave_angry():
 		return
 	interaction_done = true
 	emit_signal("on_customer_got_incorrect_package")
-	#wanted_package.poof()
+	wanted_package.poof()
+	await get_tree().create_timer(2.0).timeout
 	wanted_package.get_parent().remove_child(wanted_package) #move the package to the shadow realm
 	leave()
 	
@@ -121,33 +138,37 @@ func leave():
 	queue_free()
 	
 func check_box(box: Node2D):
-	print(box.name)
-	if(box.collider.disabled): #very cool godot bug
-		print("DISABLED")
+	if(interaction_done):
 		return
+	print(box.name)
 	if(box == wanted_package):
 		call_deferred("get_package_and_leave")
-		set_text("Thanks.")
-		await get_tree().create_timer(1.5).timeout
-		speech_bubble.hide()
+		set_text("Thanks.", true)
+		return true
 	else:
 		strikes += 1
 		if(strikes < 3):
-			set_text("this isn't my package.")
+			set_text("this isn't my package. " + package_description)
 		else:
-			set_text("for the last time, this isn't my package!")
+			set_text("for the last time, this isn't my package! " + package_description)
 		if(strikes > 3):
 			call_deferred("leave_angry")
 			mad = true
-			set_text("Fucking idiot.")
-			await get_tree().create_timer(1.5).timeout
-			speech_bubble.hide()
-	
-func clear_box(_box: Node2D):
-	if(!interaction_done):
-		set_text(package_description)
+			set_text("Fucking idiot.", true)
+		return false
 		
 func set_data(data: CustomerData):
 	self.data = data
 	sprite.sprite_frames = data.animations
+	
+func _on_hover(over: bool):
+	selected = over
+	if(selected):
+		sprite.material.set("shader_parameter/line_color", Color.WHITE)
+		Global.selected_customers.append(self)
+	else:
+		sprite.material.set("shader_parameter/line_color", Color(1,1,1,0))
+		Global.selected_customers.erase(self)
+	pass
+	
 	

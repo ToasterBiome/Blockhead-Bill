@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CustomerData" load_steps=8 format=3 uid="uid://u6gwx6ps0id4"]
+[gd_resource type="Resource" script_class="CustomerData" load_steps=10 format=3 uid="uid://u6gwx6ps0id4"]
 
 [ext_resource type="Script" path="res://CustomerData.gd" id="1_aj2yg"]
 [ext_resource type="Texture2D" uid="uid://c2sa6g2dhlvs3" path="res://sprites/wizardidle1.png" id="1_knycl"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://b4pd8xi2yr68o" path="res://sprites/wizardidle2.png" id="2_tlcog"]
 [ext_resource type="Texture2D" uid="uid://lvum3q5neqtu" path="res://sprites/wizardtalk1.png" id="3_3s4sv"]
 [ext_resource type="Texture2D" uid="uid://drta7idg2rbhv" path="res://sprites/wizardtalk2.png" id="4_3ux5i"]
+[ext_resource type="Texture2D" uid="uid://b8cmj5ukfb2cs" path="res://sprites/wizarditem.png" id="6_rosth"]
+[ext_resource type="Texture2D" uid="uid://dtun1vg7msvo2" path="res://sprites/wizardpic.png" id="7_ec0ui"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xc6o3"]
 animations = [{
@@ -43,3 +45,9 @@ animations = [{
 [resource]
 script = ExtResource("1_aj2yg")
 animations = SubResource("SpriteFrames_xc6o3")
+item_sprite = ExtResource("6_rosth")
+portait = ExtResource("7_ec0ui")
+username = "spectral angel 69"
+one_star = "If it were not for the convenient portal travel this place would have been turned to rubble by me ages ago! I will be sorting through my Posticrux for a better place to receive my postage."
+three_star = "Short of the excellence that a post office is capable of. For the crime of failing to meet my expectations I will only curse this place for 50 years."
+five_star = "Icks huxxses veno mordum! This place has fulfilled the prophecy! A thousand years of decent customer service is upon us! REJOICE!!!!!"

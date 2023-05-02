@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_wwtau")
+level_name = "5"
 packages = 15
 seconds = 60

@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="CustomerData" load_steps=8 format=3 uid="uid://knk0dpypq5ls"]
+[gd_resource type="Resource" script_class="CustomerData" load_steps=10 format=3 uid="uid://knk0dpypq5ls"]
 
 [ext_resource type="Texture2D" uid="uid://4gbq2qy2btgf" path="res://sprites/astrohappy.png" id="1_45rbt"]
 [ext_resource type="Texture2D" uid="uid://c7dxuo3ploh1x" path="res://sprites/astroidle1.png" id="2_ux0kx"]
 [ext_resource type="Texture2D" uid="uid://dl54girp2cr4h" path="res://sprites/astroidle2.png" id="3_ernf4"]
 [ext_resource type="Texture2D" uid="uid://b6pfdxoh43ep8" path="res://sprites/astrotalk1.png" id="4_wj7g0"]
 [ext_resource type="Texture2D" uid="uid://5fmdx6ic47ro" path="res://sprites/astrotalk2.png" id="5_o8scd"]
+[ext_resource type="Texture2D" uid="uid://bb8ismmr1dbl5" path="res://sprites/astroitem.png" id="6_ffpi3"]
 [ext_resource type="Script" path="res://CustomerData.gd" id="6_qkbdv"]
+[ext_resource type="Texture2D" uid="uid://b41eujst1ythu" path="res://sprites/astropic.png" id="7_yi8s8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gl7si"]
 animations = [{
@@ -43,3 +45,9 @@ animations = [{
 [resource]
 script = ExtResource("6_qkbdv")
 animations = SubResource("SpriteFrames_gl7si")
+item_sprite = ExtResource("6_ffpi3")
+portait = ExtResource("7_yi8s8")
+username = "Karen Kepler"
+one_star = "This is probably one of the worst post offices I had ever been to. The staff are unfriendly and hmmm... (trying to come up with a nicer word than \"SLOW\") They always made it obvious that they don't care that the line is all the way to the door."
+three_star = "The employees always look like they're having fun rather than working. Waiting is a big problem for this place, not the best."
+five_star = "This place is out of this world! (lol) Seriously some of the best service I have ever received and I’m surprised they keep it so clean too!"

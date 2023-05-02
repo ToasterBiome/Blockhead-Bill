@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://c1dnw1d8sdf7b"]
+[gd_scene load_steps=8 format=3 uid="uid://c1dnw1d8sdf7b"]
 
 [ext_resource type="Script" path="res://main_menu.gd" id="1_hum34"]
 [ext_resource type="Theme" uid="uid://dy3s2gjdlontx" path="res://top_ui.tres" id="1_k0tsu"]
+[ext_resource type="Texture2D" uid="uid://qdln0vc5uqo0" path="res://sprites/postoffice.png" id="3_r4ydu"]
+[ext_resource type="Texture2D" uid="uid://fle8pej0w4w1" path="res://sprites/logo.png" id="3_r5ga3"]
+[ext_resource type="Texture2D" uid="uid://3h2cph5ct08p" path="res://sprites/prismapunch.png" id="4_kd8a3"]
+[ext_resource type="Texture2D" uid="uid://7iebyn6s51t4" path="res://sprites/godot.png" id="5_8lx7s"]
+[ext_resource type="Script" path="res://Credits.gd" id="5_dvtem"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -14,22 +19,145 @@ script = ExtResource("1_hum34")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Start Button" type="Button" parent="CanvasLayer"]
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("3_r4ydu")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -52.0
-offset_top = -24.0
-offset_right = 52.0
-offset_bottom = 24.0
+offset_left = -138.5
+offset_top = 104.0
+offset_right = 138.5
+offset_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 32
+
+[node name="Exit Button" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_k0tsu")
+text = "EXIT"
+
+[node name="Credits Button" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_k0tsu")
+text = "CREDITS
+"
+
+[node name="Start Button" type="Button" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_k0tsu")
+text = "START"
+
+[node name="Logo" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 320.0
+offset_top = 16.0
+offset_right = 320.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_r5ga3")
+
+[node name="Version" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -51.0
+offset_right = 144.0
+offset_bottom = -8.0
+grow_vertical = 0
+theme = ExtResource("1_k0tsu")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "VERSION"
+
+[node name="Credits" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -256.0
+offset_top = 32.0
+offset_right = 256.0
+offset_bottom = 352.0
+grow_horizontal = 2
+color = Color(0.0156863, 0.0156863, 0.0156863, 0.54902)
+
+[node name="Label" type="RichTextLabel" parent="CanvasLayer/Credits"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_k0tsu")
-text = "BEGIN"
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "[shake rate=2 level=2]PRISMAPUNCH GAMES
+Declan Gatenby - Art
+Alex Dimitrijevic - Programming
+Andrew Schick - Reviews, Testing
+Alex Hartman - Testing
+[u]Testers:[/u]
+Lil E, Lazenn, Chubbygummibear, Xoxeyos
+[u]Assets:[/u]
+[url=https://github.com/GDQuest/godot-shaders/blob/master/godot/Shaders/outline2D_outer.shader]Outline Shader[/url] by GD Quest
+[url=https://www.dafont.com/bad-comic.font]Bad Comic[/url] by GGBotNet
+[/shake]"
+script = ExtResource("5_dvtem")
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="Intro" type="ColorRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Prismapunch Games" type="TextureRect" parent="CanvasLayer/Intro"]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 16.0
+offset_right = 1408.0
+offset_bottom = 1040.0
+scale = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("4_kd8a3")
+
+[node name="Godot Logo" type="TextureRect" parent="CanvasLayer/Intro"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -217.5
+offset_top = -170.0
+offset_right = 217.5
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("5_8lx7s")
+stretch_mode = 3
+
+[node name="Black Screen" type="ColorRect" parent="CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0

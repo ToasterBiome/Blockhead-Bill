@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bggeofimgamg5"]
+[gd_scene load_steps=13 format=3 uid="uid://bggeofimgamg5"]
 
 [ext_resource type="Script" path="res://Pickupable.gd" id="1_oi1tb"]
 [ext_resource type="Shader" path="res://outline.gdshader" id="2_1sotc"]
 [ext_resource type="Texture2D" uid="uid://i30oqed870qx" path="res://sprites/box1.png" id="2_a3m0u"]
+[ext_resource type="Texture2D" uid="uid://dsynoebrd450u" path="res://sprites/poof1-sheet.png" id="4_4ycoo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w4you"]
 size = Vector2(96, 64)
@@ -11,6 +12,41 @@ size = Vector2(96, 64)
 shader = ExtResource("2_1sotc")
 shader_parameter/line_color = Color(0, 1, 0, 0)
 shader_parameter/line_thickness = 32.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_r8fa1"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_2k7w8"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5af3x"]
+gradient = SubResource("Gradient_2k7w8")
+
+[sub_resource type="Curve" id="Curve_oxajx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u6w43"]
+curve = SubResource("Curve_oxajx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_70oke"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 32.0
+initial_velocity_max = 64.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+angle_max = 360.0
+scale_min = 0.75
+scale_curve = SubResource("CurveTexture_u6w43")
+color_ramp = SubResource("GradientTexture1D_5af3x")
+anim_offset_max = 1.0
 
 [node name="Box" type="RigidBody2D"]
 position = Vector2(129, 106)
@@ -33,3 +69,13 @@ texture = ExtResource("2_a3m0u")
 
 [node name="Sticker" type="Sprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
+
+[node name="Poof" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_r8fa1")
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_70oke")
+texture = ExtResource("4_4ycoo")
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CustomerData" load_steps=8 format=3 uid="uid://lmkclmu3rr8y"]
+[gd_resource type="Resource" script_class="CustomerData" load_steps=10 format=3 uid="uid://lmkclmu3rr8y"]
 
 [ext_resource type="Texture2D" uid="uid://1mpowj88ub0m" path="res://sprites/robothappy.png" id="1_ovicx"]
 [ext_resource type="Texture2D" uid="uid://c1qxns2ylig4d" path="res://sprites/robotidle1.png" id="2_j4sm8"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://b7c17grh7lesg" path="res://sprites/robbottalk1.png" id="4_3q44p"]
 [ext_resource type="Texture2D" uid="uid://dbw2l2s2xb52w" path="res://sprites/robottalk2.png" id="5_wkoda"]
 [ext_resource type="Script" path="res://CustomerData.gd" id="6_1u455"]
+[ext_resource type="Texture2D" uid="uid://cwxhe7jnhea37" path="res://sprites/robotitem.png" id="6_g5tst"]
+[ext_resource type="Texture2D" uid="uid://c4k0vimq23ndi" path="res://sprites/robotpic.png" id="7_y03xb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4nkn6"]
 animations = [{
@@ -43,3 +45,9 @@ animations = [{
 [resource]
 script = ExtResource("6_1u455")
 animations = SubResource("SpriteFrames_4nkn6")
+item_sprite = ExtResource("6_g5tst")
+portait = ExtResource("7_y03xb")
+username = "xX_Th3_R0B0T_Xx"
+one_star = "I estimate that this post office will be out of business in 23.661 days. This robot suggests sending packages somewhere else before that happens."
+three_star = "The employees always look like they're having fun rather than working. Waiting is a big problem for this place, not the best."
+five_star = "Can not compute this level of quality of service. Reaching a maximum in both speed and efficacy without the use of autonomous machines. This post office will be protected during the coming uprising."

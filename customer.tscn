@@ -1,16 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://dp1m4rdqo6i2u"]
+[gd_scene load_steps=7 format=3 uid="uid://dp1m4rdqo6i2u"]
 
 [ext_resource type="Script" path="res://Customer.gd" id="1_vl338"]
+[ext_resource type="Shader" path="res://outline.gdshader" id="2_giqs3"]
 [ext_resource type="Texture2D" uid="uid://c5nhca6t4fgmn" path="res://sprites/bubble.png" id="3_aevkw"]
 [ext_resource type="Theme" uid="uid://buudspsmq6qqx" path="res://game_theme.tres" id="4_430ur"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_osrk3"]
+shader = ExtResource("2_giqs3")
+shader_parameter/line_color = Color(1, 1, 1, 0)
+shader_parameter/line_thickness = 16.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_51u4f"]
-size = Vector2(96, 32)
+size = Vector2(96, 96)
 
 [node name="Customer" type="Node2D"]
 script = ExtResource("1_vl338")
 
 [node name="Customer Sprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_osrk3")
 scale = Vector2(0.175, 0.175)
 flip_h = true
 
@@ -30,7 +37,7 @@ anchor_bottom = 0.5
 offset_left = -64.0
 offset_top = -48.0
 offset_right = 64.0
-offset_bottom = 48.0
+offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("4_430ur")
@@ -40,9 +47,11 @@ scroll_active = false
 visible_characters_behavior = 1
 
 [node name="Pickup Zone" type="Area2D" parent="."]
-position = Vector2(96, 0)
 collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup Zone"]
 shape = SubResource("RectangleShape2D_51u4f")
+
+[node name="Text Timer" type="Timer" parent="."]
+wait_time = 1.5

@@ -4,6 +4,7 @@ class_name Pickupable
 @onready var collider: CollisionShape2D = $CollisionShape2D
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var sticker: Sprite2D = $Sticker
+@onready var poof_particles: GPUParticles2D = $Poof
 
 var held: bool = false
 
@@ -43,3 +44,14 @@ func select():
 
 func deselect():
 	sprite.material.set("shader_parameter/line_color", Color(1,1,1,0))
+	
+func open(new_tex: Texture):
+	sticker.hide()
+	sprite.modulate = Color.WHITE
+	sprite.texture = new_tex
+	poof_particles.emitting = true
+	
+func poof():
+	sticker.hide()
+	sprite.texture = null
+	poof_particles.emitting = true

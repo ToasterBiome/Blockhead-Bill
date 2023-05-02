@@ -13,6 +13,7 @@ func _ready():
 	grabArea.connect("body_exited", Callable(self, "_on_area_exited"))
 	$"..".connect("on_game_state_changed",Callable(self,"on_game_state_changed"))
 
+
 func _process(_delta):
 	z_index = int(position.y)
 	velocity = Vector2.ZERO
@@ -43,10 +44,27 @@ func _process(_delta):
 	move_and_slide()
 	
 	if(can_move && Input.is_action_just_pressed("mouse_left")):
+		var selected_customer: Customer = null
+		for customer in Global.selected_customers:
+			if(customer.position.distance_to(self.position) > 256):
+				continue
+			if(customer.interaction_done):
+				continue
+			if(!customer.can_interact):
+				continue
+			if(!selected_customer):
+				selected_customer = customer
+			if(customer.z_index > customer.z_index):
+				selected_customer = customer
 		if(held_item == null):
 			pickup_item()
 		else:
-			drop_item()
+			if(selected_customer):
+				var success = selected_customer.check_box(held_item)
+				if(success):
+					drop_item(success)
+			else:
+				drop_item()
 			
 	
 	
@@ -76,15 +94,16 @@ func pickup_item():
 	boxes_around.erase(held_item)
 	held_item.deselect()
 	
-func drop_item():
+func drop_item(success: bool = false):
 	if(held_item == null):
 		return
-	remove_child(held_item)
-	get_tree().get_root().add_child(held_item)
-	var mouse_pos = get_global_mouse_position()
-	var direction: Vector2 = position.direction_to(mouse_pos).snapped(Vector2.ONE)
-	sprite.flip_h = (direction.x > 0)
-	held_item.on_drop(global_position + (direction * 96))
+	if(!success):
+		remove_child(held_item)
+		get_tree().get_root().add_child(held_item)
+		var mouse_pos = get_global_mouse_position()
+		var direction: Vector2 = position.direction_to(mouse_pos).snapped(Vector2.ONE)
+		sprite.flip_h = (direction.x > 0)
+		held_item.on_drop(global_position + (direction * 96))
 	held_item = null
 	
 func _on_area_entered(body: Node2D):
@@ -101,4 +120,3 @@ func on_game_state_changed(state: GameManager.GameState):
 		can_move = true
 	else:
 		can_move = false
-	

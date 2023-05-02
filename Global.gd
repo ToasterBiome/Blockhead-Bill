@@ -1,5 +1,6 @@
 extends Node
 
+var version = 0.7
 var box_sprites: Dictionary = {
 	"normal": preload("res://sprites/box1.png"),
 	"long": preload("res://sprites/box2.png"),
@@ -36,6 +37,7 @@ var customer_list = [
 ]
 
 var levels = [
+	preload("res://levels/T.tres"),
 	preload("res://levels/1.tres"),
 	preload("res://levels/2.tres"),
 	preload("res://levels/3.tres"),
@@ -49,6 +51,8 @@ var random_characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ012345678"
 
 var boxes = []
 var available_boxes = []
+
+var selected_customers = []
 
 func get_serial_number(length: int):
 	var result = ""

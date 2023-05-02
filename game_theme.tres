@@ -5,7 +5,7 @@
 
 [resource]
 RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
-RichTextLabel/font_sizes/italics_font_size = 24
-RichTextLabel/font_sizes/normal_font_size = 24
+RichTextLabel/font_sizes/italics_font_size = 16
+RichTextLabel/font_sizes/normal_font_size = 16
 RichTextLabel/fonts/italics_font = ExtResource("1_6snfk")
 RichTextLabel/fonts/normal_font = ExtResource("2_jf0dw")

@@ -42,6 +42,12 @@ var time_left = 120 #in seconds
 @onready var solo_menu_button: Button = $"GUI/Black Screen/Solo Main Menu"
 @onready var fade_screen: ColorRect = $"GUI/Fade Screen"
 
+@onready var review = $"GUI/Black Screen/Review"
+@onready var profile_picture: TextureRect = $"GUI/Black Screen/Review/Profile Picture"
+@onready var stars_label: Label = $"GUI/Black Screen/Review/Stars"
+@onready var review_label: Label = $"GUI/Black Screen/Review/Review Text"
+@onready var username_label: Label = $"GUI/Black Screen/Review/Username"
+
 var fade_tween: Tween
 
 enum GameState {
@@ -57,9 +63,10 @@ signal on_game_state_changed(new_state)
 var can_spawn_box = true
 
 func _ready():
+	randomize()
 	generate_boxes(Global.levels[Global.level - 1].packages)
 	time_left = Global.levels[Global.level - 1].seconds
-	day_text.text = "Day " + str(Global.level)
+	day_text.text = "Day " + str(Global.levels[Global.level - 1].level_name)
 	make_manifest()
 	box_spawn_timer.connect("timeout", Callable(self, "spawn_box"))
 	box_spawn_timer.start()
@@ -183,6 +190,7 @@ func _game_over(reason: String):
 	lose_text.pop()
 	var fade_tween: Tween = get_tree().create_tween()
 	fade_tween.tween_property(black_screen,"modulate",Color.WHITE,1.0)
+	_show_review()
 	
 func _win():
 	clock_timer.stop()
@@ -203,6 +211,7 @@ func _win():
 	black_screen.modulate = Color(0,0,0,0)
 	var fade_tween: Tween = get_tree().create_tween()
 	fade_tween.tween_property(black_screen,"modulate",Color.WHITE,1.0)
+	_show_review()
 	
 func _go_to_scene(scene):
 	if(fade_tween):
@@ -219,3 +228,23 @@ func _next_level():
 func _on_box_clear_conveyer(_body: Node2D):
 	print("passed")
 	can_spawn_box = true
+	
+func _show_review():
+	#make review
+	review.show()
+	var random_customer: CustomerData = Global.customer_list.pick_random()
+	var stars_text: String = ""
+	var review_text: String = ""
+	if(game_state == GameState.GAME_WIN):
+		stars_text = "★★★★★"
+		review_text = random_customer.five_star
+	elif(game_state == GameState.GAME_CONTINUE):
+		stars_text = "★★★☆☆"
+		review_text = random_customer.three_star
+	else:
+		stars_text = "★☆☆☆☆"
+		review_text = random_customer.one_star
+	profile_picture.texture = random_customer.portait
+	stars_label.text = stars_text
+	review_label.text = review_text
+	username_label.text = random_customer.username

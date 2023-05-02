@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="CustomerData" load_steps=8 format=3 uid="uid://kf180vf40lrn"]
+[gd_resource type="Resource" script_class="CustomerData" load_steps=10 format=3 uid="uid://kf180vf40lrn"]
 
 [ext_resource type="Texture2D" uid="uid://cfpiv4vgxlvf1" path="res://sprites/burglarhappy.png" id="1_m4xg5"]
 [ext_resource type="Texture2D" uid="uid://dm141o8fuphnm" path="res://sprites/burglaridle1.png" id="2_ktfre"]
 [ext_resource type="Texture2D" uid="uid://benaqxqs151vh" path="res://sprites/burglaridle2.png" id="3_nif11"]
 [ext_resource type="Texture2D" uid="uid://dtvff5kngffto" path="res://sprites/burglartalk1.png" id="4_uhae5"]
 [ext_resource type="Texture2D" uid="uid://c74ihyfoc27jy" path="res://sprites/burglartalk2.png" id="5_wdvhx"]
+[ext_resource type="Texture2D" uid="uid://c0cn7qflbchv0" path="res://sprites/burglaritem.png" id="6_fdsk4"]
 [ext_resource type="Script" path="res://CustomerData.gd" id="6_xh64n"]
+[ext_resource type="Texture2D" uid="uid://d23d54y7re55b" path="res://sprites/burglarpic.png" id="7_r7nss"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n6y38"]
 animations = [{
@@ -43,3 +45,9 @@ animations = [{
 [resource]
 script = ExtResource("6_xh64n")
 animations = SubResource("SpriteFrames_n6y38")
+item_sprite = ExtResource("6_fdsk4")
+portait = ExtResource("7_r7nss")
+username = "Prisoner \"Archy\" 34AB1"
+one_star = "worse than county jail. srsly go somewhere else. easy spot to hit though"
+three_star = "too many cameras and asked me to remove ski mask but a nice joint for a quick stop"
+five_star = "WOW! what a great place not only do they leave most of their doors unlocked but they also give you your packages quickly"
