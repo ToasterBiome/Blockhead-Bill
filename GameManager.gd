@@ -198,7 +198,7 @@ func _game_over(reason: String):
 	
 func _win():
 	clock_timer.stop()
-	if(Global.level >= Global.levels.size() - 1):
+	if(Global.level >= Global.levels.size()):
 		game_state = GameState.GAME_WIN
 		solo_menu_button.show()
 		continue_text.clear()
